@@ -11,6 +11,7 @@
 
 	prompt: 	.asciiz "Enter the next number:\n"
     newline: 	.asciiz "\n"
+	maximum:	.asciiz "Maximum: "
 
 #Text Area (i.e. instructions/code directive)
 .text
@@ -76,30 +77,39 @@ t0LTt1:
 	j print_t1					#else $t1 is greatest, print_t1
 
 print_t0:
+	la $a0, maximum
+	li $v0, 4
+	syscall				#print "Maximum:"
 	li $v0, 1
 	move $a0, $t0
-	syscall
+	syscall				#print num
 	la $a0, newline
 	li $v0, 4
-	syscall
+	syscall				#print newline
 	j exit
 
 print_t1:
+	la $a0, maximum
+	li $v0, 4
+	syscall				#print "Maximum:"
 	li $v0, 1
 	move $a0, $t1
-	syscall
+	syscall				#print num
 	la $a0, newline
 	li $v0, 4
-	syscall
+	syscall				#print newline
 	j exit
 
 print_t2:
+	la $a0, maximum
+	li $v0, 4
+	syscall				#print "Maximum:"
 	li $v0, 1
 	move $a0, $t2
-	syscall
+	syscall				#print num
 	la $a0, newline
 	li $v0, 4
-	syscall
+	syscall				#print newline
 
 exit:
 	li $v0, 10
