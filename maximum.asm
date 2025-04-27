@@ -9,8 +9,8 @@
 .data
 	# TODO: Complete these incomplete declarations / initializations
 
-	.asciiz "Enter the next number:\n"
-    .asciiz "\n"
+	prompt: 	.asciiz "Enter the next number:\n"
+    newline: 	.asciiz "\n"
 
 #Text Area (i.e. instructions/code directive)
 .text
@@ -18,15 +18,26 @@
 main:
 	# TODO: Write your code here
     # You can have other labels expressed here, if you need to
+	la $a0, prompt
+	li $v0, 4
+	syscall			#print out "Enter the next number \n"
 	li $v0, 5
 	syscall
-	move $t0, $v0
+	move $t0, $v0	#first num in $t0
+	
+	la $a0, prompt
+	li $v0, 4
+	syscall			#print out "Enter the next number \n"
 	li $v0, 5
 	syscall
-	move $t1, $v0
+	move $t1, $v0	#second num in $t1
+
+	la $a0, prompt
+	li $v0, 4
+	syscall			#print out "Enter the next number \n"
 	li $v0, 5
 	syscall
-	move $t2, $v0
+	move $t2, $v0	#third num in $t2
 	
 setT0Pos:
 	slt $t4, $t0, $zero
@@ -68,17 +79,26 @@ print_t0:
 	li $v0, 1
 	move $a0, $t0
 	syscall
+	la $a0, newline
+	li $v0, 4
+	syscall
 	j exit
 
 print_t1:
 	li $v0, 1
 	move $a0, $t1
 	syscall
+	la $a0, newline
+	li $v0, 4
+	syscall
 	j exit
 
 print_t2:
 	li $v0, 1
 	move $a0, $t2
+	syscall
+	la $a0, newline
+	li $v0, 4
 	syscall
 
 exit:
